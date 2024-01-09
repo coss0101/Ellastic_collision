@@ -4,7 +4,7 @@ System::System():
 window(sf::VideoMode(WIDTH, HEIGHT), "Sistema")
 {
     buildTheWall();
-    createParticles(1000);
+    createParticles(50);
 }   
 
 void System::run()
@@ -86,34 +86,37 @@ bool System::PWCollision(Particle &particle, Wall &wall)
 {
     sf::Vector2f pp = particle.getPosition();
     sf::Vector2f wp = wall.getPosition();
+
     float deltax = abs(pp.x-wp.x);
     float deltay = abs(pp.y-wp.y);
-    if(deltax<(particle.getRadius()+wall.getWidth()/2) && deltay<(particle.getRadius()+wall.getHeight()/2)){
+
+    float rotation = wall.getRotation()*M_PI/180.f;
+    float tdeltax = abs(deltax*cos(-rotation)-deltay*sin(-rotation));
+    float tdeltay = abs(deltay*cos(-rotation)+deltax*sin(-rotation)); 
+
+    if(tdeltax<(particle.getRadius()+wall.getWidth()/2) && tdeltay<(particle.getRadius()+wall.getHeight()/2)){
         sf::Vector2f speed = particle.getSpeed();
-        float pleft = pp.x-particle.getRadius();
-        float pright = pp.x+particle.getRadius();
-        float wleft = wp.x - wall.getWidth()/2;
-        float wright = wp.x + wall.getWidth()/2;
 
-        float ptop = pp.y-particle.getRadius();
-        float pbottom = pp.y+particle.getRadius();
-        float wtop = wp.y - wall.getHeight()/2;
-        float wbottom = wp.y + wall.getHeight()/2;
+        float x = -speed.x*cos(2*M_PI-rotation) + speed.y*sin(2*M_PI-rotation);
+        float y = -speed.y*cos(2*M_PI-rotation) - speed.x*sin(2*M_PI-rotation);
 
-        if(pleft < wleft || pright > wright)
-            particle.setSpeed(sf::Vector2f(-speed.x, speed.y));
+        printf("%f %f\n", x, y);
+        x = -x*cos(rotation)-y*sin(rotation);
+        y = +y*cos(rotation)-x*sin(rotation);
 
-        else if(pbottom>wbottom || ptop < wtop)
-            particle.setSpeed(sf::Vector2f(speed.x, -speed.y));
-        
+
+
+        printf("%f %f, %f %f\n", speed.x, speed.y, x, y);
+
+        particle.setSpeed(sf::Vector2f(x,y));
     }
 
     return false;
 }
 
-float System::calculateDistance(sf::Vector2f p1, sf::Vector2f p2)
+float System::calculateDistance(sf::Vector2f p1)
 {
-    sf::Vector2f r = p2-p1;
+    sf::Vector2f r = p1;
     return  sqrt(r.x*r.x+r.y*r.y);
 }
 
@@ -136,10 +139,10 @@ void System::buildTheWall()
     float wH = WIDTH*(2/3.0);
 
     float p1 = wH/2.0-THICKNESS/2.0;
-    walls.push_back(new Wall(sf::Vector2f(THICKNESS, wV),windowCenter-sf::Vector2f(p1, 0)));
-    walls.push_back(new Wall(sf::Vector2f(THICKNESS, wV), windowCenter+sf::Vector2f(p1+1, 0)));
+    walls.push_back(new Wall(sf::Vector2f(wV, THICKNESS), 90.0, windowCenter-sf::Vector2f(p1, 0)));
+    walls.push_back(new Wall(sf::Vector2f(wV, THICKNESS), 90.0, windowCenter+sf::Vector2f(p1+1, 0)));
 
     float p2 = wV/2.0+THICKNESS/2.0;
-    walls.push_back(new Wall(sf::Vector2f(wH,THICKNESS), windowCenter-sf::Vector2f(0, p2)));
-    walls.push_back(new Wall(sf::Vector2f(wH,THICKNESS), windowCenter+sf::Vector2f(0, p2)));
+    walls.push_back(new Wall(sf::Vector2f(wH,THICKNESS), 0, windowCenter-sf::Vector2f(0, p2)));
+    walls.push_back(new Wall(sf::Vector2f(wH,THICKNESS), 0, windowCenter+sf::Vector2f(0, p2)));
 }

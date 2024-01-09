@@ -26,7 +26,7 @@ private:
     void particlesCollision();
     void particlesWallCollision();
     bool PWCollision(Particle &particle, Wall &wall);
-    float calculateDistance(sf::Vector2f p1, sf::Vector2f p2);
+    float calculateDistance(sf::Vector2f p1);
     Particle* createParticle();
     void createParticles(int num);
     void buildTheWall();

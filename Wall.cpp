@@ -1,13 +1,15 @@
 #include "Wall.h"
 
-Wall::Wall(sf::Vector2f size, sf::Vector2f initialPosition):
-shape(size)
+Wall::Wall(sf::Vector2f size, float rotation, sf::Vector2f initialPosition):
+shape(size),
+rotation(rotation)
 {
     w = size.x;
     h = size.y;
     shape.setOrigin(sf::Vector2f(w/2.0, h/2.0));
     shape.setFillColor(sf::Color::White);
     shape.setPosition(initialPosition);
+    shape.setRotation(rotation);
 
 }
 
@@ -29,4 +31,9 @@ int Wall::getHeight()
 sf::Vector2f Wall::getPosition()
 {
     return shape.getPosition();
+}
+
+float Wall::getRotation()
+{
+    return rotation;
 }
