@@ -1,0 +1,26 @@
+[
+{
+  "directory": "/home/bruno/Projetos/Ellastic_collision/build",
+  "command": "/usr/bin/c++   -g -std=gnu++14 -o CMakeFiles/gravitacao.dir/main.cpp.o -c /home/bruno/Projetos/Ellastic_collision/main.cpp",
+  "file": "/home/bruno/Projetos/Ellastic_collision/main.cpp",
+  "output": "CMakeFiles/gravitacao.dir/main.cpp.o"
+},
+{
+  "directory": "/home/bruno/Projetos/Ellastic_collision/build",
+  "command": "/usr/bin/c++   -g -std=gnu++14 -o CMakeFiles/gravitacao.dir/System.cpp.o -c /home/bruno/Projetos/Ellastic_collision/System.cpp",
+  "file": "/home/bruno/Projetos/Ellastic_collision/System.cpp",
+  "output": "CMakeFiles/gravitacao.dir/System.cpp.o"
+},
+{
+  "directory": "/home/bruno/Projetos/Ellastic_collision/build",
+  "command": "/usr/bin/c++   -g -std=gnu++14 -o CMakeFiles/gravitacao.dir/Particle.cpp.o -c /home/bruno/Projetos/Ellastic_collision/Particle.cpp",
+  "file": "/home/bruno/Projetos/Ellastic_collision/Particle.cpp",
+  "output": "CMakeFiles/gravitacao.dir/Particle.cpp.o"
+},
+{
+  "directory": "/home/bruno/Projetos/Ellastic_collision/build",
+  "command": "/usr/bin/c++   -g -std=gnu++14 -o CMakeFiles/gravitacao.dir/Wall.cpp.o -c /home/bruno/Projetos/Ellastic_collision/Wall.cpp",
+  "file": "/home/bruno/Projetos/Ellastic_collision/Wall.cpp",
+  "output": "CMakeFiles/gravitacao.dir/Wall.cpp.o"
+}
+]
